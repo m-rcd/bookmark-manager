@@ -2,6 +2,7 @@ require 'capybara/rspec'
 require File.join(File.dirname(__FILE__), '..', 'app.rb')
 require 'capybara'
 require 'rspec'
+require 'pry'
 
 Capybara.app = BookmarkApp
 ENV['RACK_ENV'] = 'test'
