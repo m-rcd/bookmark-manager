@@ -1,10 +1,14 @@
 class Bookmark
- LIST = []
-  def initialize
-    LIST << self
+  attr_reader :name, :url
+  LIST = ['https://www.goodreads.com/',
+    'https://makers.tech']
+
+  def initialize(name, url)
+    @name = name
+    @url = url
   end
 
   def Bookmark.all
-    LIST
+    Bookmark::LIST
   end
 end
