@@ -1,10 +1,13 @@
 require './models/bookmark'
+
 describe Bookmark do
   describe '.all' do
-    it 'returns list of instances created' do
-      a = ['https://www.goodreads.com/',
-        'https://makers.tech']
-      expect(Bookmark.all).to eq(a)
+    it 'returns all bookmarks' do
+      bookmarks = Bookmark.all
+
+      expect(bookmarks).to include("http://www.makersacademy.com")
+      expect(bookmarks).to include("http://www.destroyallsoftware.com")
+      expect(bookmarks).to include("http://www.google.com")
     end
   end
 end

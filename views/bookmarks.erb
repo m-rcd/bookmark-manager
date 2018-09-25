@@ -1,7 +1,5 @@
-
-<% @bookmarks.each do |bookmark| %>
-<div>
-  <h2><%=bookmark%></h2>
-  <h3><a href='<%=bookmark%>'><%=bookmark%></a></h3>
-</div>
-<%end%>
+<ul>
+  <% @bookmarks.each do |bookmark| %>
+    <li><%= bookmark %></li>
+  <% end %>
+</ul>

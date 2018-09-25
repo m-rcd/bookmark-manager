@@ -6,38 +6,12 @@ feature 'testing homepage' do
   end
 end
 
-feature 'testing bookmarks' do
-  before do
-    visit('/')
-    click_button 'See Bookmarks'
-  end
+feature 'viewing bookmarks' do
+  scenario 'user can see bookmarks' do
+    visit('/bookmarks')
+    expect(page).to have_content('http://www.makersacademy.com')
+    expect(page).to have_content('http://www.destroyallsoftware.com')
+    expect(page).to have_content('http://www.google.com')
 
-  context 'first bookmark' do
-
-    # scenario 'displays first bookmark - name' do
-    #   expect(page).to have_content('https://www.goodreads.com/')
-    # end
-
-    scenario 'displays first bookmark - url' do
-      expect(page).to have_content('https://www.goodreads.com/')
-    end
-
-    scenario 'first bookmark url link is correct' do
-      expect(page).to have_selector(:css, 'a[href="https://www.goodreads.com/"]')
-    end
-  end
-
-  context 'second bookmark' do
-    # scenario 'displays second bookmark - name' do
-    #   expect(page).to have_content('https://makers.tech')
-    # end
-
-    scenario 'displays second bookmark - url' do
-      expect(page).to have_content('https://makers.tech')
-    end
-
-    scenario 'first bookmark url link is correct' do
-      expect(page).to have_selector(:css, 'a[href="https://makers.tech"]')
-    end
   end
 end
