@@ -11,4 +11,4 @@ So that I can save a website
 I would like to add the site's address and title to bookmark manager
 ```
 
-![Diagram for user story 1](Diagram.png)
+![Diagram for user story 1](assets/Diagram.png)
