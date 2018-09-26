@@ -3,10 +3,14 @@ require 'pg'
 class Bookmark
 
   def self.all
-    conn = PG.connect( dbname: 'bookmark_manager', user: 'mariannerachid' )
+    if ENV['ENVIRONMENT'] == 'test'
+      conn = PG.connect( dbname: 'bookmark_manager_test' )
+    else
+      conn = PG.connect( dbname: 'bookmark_manager')
+    end
+
     bookmark = conn.exec( "SELECT * FROM bookmarks" )
-      bookmark.map do | row |
-        row['url']
-      end
+      bookmark.map { |row| row['url'] }
+    
   end
 end
