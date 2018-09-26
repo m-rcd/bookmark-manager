@@ -5,7 +5,8 @@ require File.join(File.dirname(__FILE__), '..', 'app.rb')
 require 'capybara'
 require 'rspec'
 require 'pry'
-require_relative './setup_test_database.rb'
+require_relative './setup_test_database'
+require 'features/web_helpers.rb'
 
 Capybara.app = BookmarkApp
 

@@ -14,3 +14,4 @@ gem 'rspec'
 gem 'sinatra'
 gem 'simplecov'
 gem 'pg'
+gem "sinatra-flash"
