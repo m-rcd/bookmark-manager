@@ -11,13 +11,13 @@ class BookmarkApp < Sinatra::Base
   end
 
   get '/bookmarks' do
-    @bookmarks = Bookmark.all
+    @bookmarks = Bookmarks.all
     erb :bookmarks
   end
 
   post '/bookmarks' do
     if Bookmarks.valid_url?(params['url'])
-      Bookmarks.add(url: params['url'])
+      Bookmarks.add(url: params['url'], title: params['title'])
     else
       flash[:alert] = "URL not valid"
     end

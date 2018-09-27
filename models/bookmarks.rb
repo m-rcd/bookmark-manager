@@ -10,16 +10,16 @@ class Bookmarks
       con = PG.connect :dbname => 'bookmark_manager'
     end
     result = con.exec("SELECT * FROM bookmarks")
-    result.map { |bookmark| bookmark['url'] }
+    result.map { |bookmark| bookmark }
   end
 
-  def self.add(url:)
+  def self.add(url: , title:)
     if ENV['ENVIRONMENT'] == 'test'
       con = PG.connect :dbname => 'bookmark_manager_test'
     else
       con = PG.connect :dbname => 'bookmark_manager'
     end
-    con.exec("INSERT INTO bookmarks (url) VALUES ('#{url}')")
+    con.exec("INSERT INTO bookmarks (url, title) VALUES ('#{url}', '#{title}')")
   end
 
   private
