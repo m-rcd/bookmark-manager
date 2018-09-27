@@ -3,7 +3,7 @@ require 'sinatra/flash'
 require './models/bookmarks'
 
 class BookmarkApp < Sinatra::Base
-  enable :sessions
+  enable :sessions, :method_override
   register Sinatra::Flash
 
   get '/' do
@@ -30,6 +30,22 @@ class BookmarkApp < Sinatra::Base
 
   get '/bookmarks/add' do
     erb :add_bookmark
+  end
+
+  delete '/bookmarks/:id' do
+   Bookmarks.delete(id: params['id'])
+    redirect '/bookmarks'
+  end
+
+  get '/bookmarks/:id/edit' do
+    @bookmark_id = params[:id]
+    @bookmark = Bookmarks.find(id: params[:id])
+    erb :update_bookmark
+  end
+
+  patch '/bookmarks/:id' do
+    Bookmarks.update(id: params[:id], title: params[:title], url: params[:url])
+      redirect '/bookmarks'
   end
 
   run! if app_file == $0
