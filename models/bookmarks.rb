@@ -3,6 +3,14 @@ require 'uri'
 
 class Bookmarks
 
+  attr_reader :id, :url, :title
+
+  def initialize(id:, url:, title:)
+    @id = id
+    @title = title
+    @url = url
+  end
+
   def self.all
     if ENV['ENVIRONMENT'] == 'test'
       con = PG.connect :dbname => 'bookmark_manager_test'
@@ -10,7 +18,9 @@ class Bookmarks
       con = PG.connect :dbname => 'bookmark_manager'
     end
     result = con.exec("SELECT * FROM bookmarks")
-    result.map { |bookmark| bookmark }
+    result.map do |bookmark|
+      Bookmarks.new(id: bookmark['id'], title: bookmark['title'], url: bookmark['url'])
+    end
   end
 
   def self.add(url: , title:)
@@ -19,7 +29,8 @@ class Bookmarks
     else
       con = PG.connect :dbname => 'bookmark_manager'
     end
-    con.exec("INSERT INTO bookmarks (url, title) VALUES ('#{url}', '#{title}')")
+    result = con.exec("INSERT INTO bookmarks (url, title) VALUES ('#{url}', '#{title}') RETURNING id, title, url;")
+    Bookmarks.new(id: result[0]['id'], title: result[0]['title'], url: result[0]['url'])
   end
 
   private

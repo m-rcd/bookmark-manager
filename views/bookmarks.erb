@@ -8,7 +8,7 @@
 <h1>Bookmarks</h1>
 <ul>
   <% @bookmarks.each do |bookmark| %>
-  <a href='<%=bookmark['url']%>'> <li><%= bookmark['title'] %></li></a>
+  <a href='<%=bookmark.url %>'> <li><%= bookmark.title %></li></a>
   <% end %>
 </ul>
 <br>
