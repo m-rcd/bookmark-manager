@@ -1,6 +1,7 @@
 require 'sinatra/base'
 require 'sinatra/flash'
 require './models/bookmarks'
+require './database_connection_setup'
 
 class BookmarkApp < Sinatra::Base
   enable :sessions, :method_override

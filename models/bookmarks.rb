@@ -1,5 +1,6 @@
 require 'pg'
 require 'uri'
+require_relative 'database_connection'
 
 class Bookmarks
 
@@ -12,12 +13,7 @@ class Bookmarks
   end
 
   def self.all
-    if ENV['ENVIRONMENT'] == 'test'
-      con = PG.connect :dbname => 'bookmark_manager_test'
-    else
-      con = PG.connect :dbname => 'bookmark_manager'
-    end
-    result = con.exec("SELECT * FROM bookmarks")
+    result = DatabaseConnection.query("SELECT * FROM bookmarks")
     result.map do |bookmark|
       Bookmarks.new(id: bookmark['id'], title: bookmark['title'], url: bookmark['url'])
     end

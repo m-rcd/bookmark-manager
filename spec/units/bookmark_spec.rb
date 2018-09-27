@@ -2,7 +2,6 @@ require './models/bookmarks'
 require 'pg'
 
 describe Bookmarks do
-
   describe '.add' do
     it 'adds a bookmark with title' do
       Bookmarks.add(url: 'www.goodbye.com', title: 'goodbye!')
