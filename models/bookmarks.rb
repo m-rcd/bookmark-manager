@@ -1,6 +1,7 @@
 require 'pg'
 require 'uri'
 require_relative 'database_connection'
+require_relative 'comments'
 
 class Bookmarks
 
@@ -56,6 +57,10 @@ class Bookmarks
     end
     result = con.exec("SELECT * FROM bookmarks WHERE id = #{id};")
     Bookmarks.new(id: result[0]['id'], title: result[0]['title'], url: result[0]['url'])
+  end
+
+  def comments(comment_class = Comment)
+    comment_class.where(bookmark_id: id)
   end
 
   private

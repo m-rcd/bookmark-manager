@@ -42,4 +42,14 @@ describe Bookmarks do
       expect(result.url).to eq 'http://www.makersacademy.com'
     end
   end
+
+  let(:comment_class) { double(:comment_class) }
+
+  describe '#comments' do
+    it 'calls .where on the comment class' do
+      bookmark = Bookmarks.add(title: 'Makers Academy', url: 'http://www.makersacademy.com')
+      expect(comment_class).to receive(:where).with(bookmark_id: bookmark.id)
+      bookmark.comments(comment_class)
+    end
+  end
 end
